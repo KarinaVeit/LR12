@@ -62,7 +62,7 @@ end;
 
 function TParallel.Volume: word;
 begin
- result:=Fa*Fb*Fc; {возвращаем во внешнюю программу объемы в виде значения типа word}
+ result:=Fa*Fb*Fc;
 end;
 
 procedure TForm1.BitBtn1Click(Sender: TObject);
