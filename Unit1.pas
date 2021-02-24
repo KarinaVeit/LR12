@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons;
 
 type
 TParallel = class;
@@ -13,9 +13,11 @@ TParallel = class;
     Button2: TButton;
     Memo1: TMemo;
     Button3: TButton;
+    BitBtn1: TBitBtn;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -63,12 +65,19 @@ begin
  result:=Fa*Fb*Fc; {возвращаем во внешнюю программу объемы в виде значения типа word}
 end;
 
+procedure TForm1.BitBtn1Click(Sender: TObject);
+begin
+  close;
+end;
+
 procedure TForm1.Button1Click(Sender: TObject);
 begin
   x:=x+1; y:=y+1; z:=z+1;
   Par1:=TParallel.Create;
+  Par[x]:=Par1;
   Par1.Init(x,y,z);
   Par1.Show;
+  Memo1.Lines.Add('Адрес в памяти объекта, содержащий в Par1, равен' +IntToStr (integer(Par1)));
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
@@ -84,7 +93,7 @@ var
     i:integer;
 begin
   for  i := 1 to 5 do
-    Memo1.Lines.Add(('Адрес объекта с номером' +IntToStr(i)+ 'равен' +IntToStr (integer(Par[i])) + 'Поле Fa=' +IntToStr(Par[i].Fa)));
+    Memo1.Lines.Add(('Адрес объекта с номером ' +IntToStr(i)+ ' равен ' +IntToStr (integer(Par[i])) + ' Поле Fa= ' +IntToStr(Par[i].Fa)));
 end;
 
 end.
